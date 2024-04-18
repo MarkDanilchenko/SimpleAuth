@@ -1,0 +1,35 @@
+# COMMON IGNORE
+# COMMON IGNORE
+# COMMON IGNORE
+# ----------
+/dist
+draft.*
+staticfiles/
+# mediafiles/
+*.pdf
+*.sql
+db_data/
+.DS_Store
+package-lock.*
+Insomnia*
+
+# Editor directories and files
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+/.vscode
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/

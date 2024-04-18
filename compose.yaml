@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+    # ------------------------------------------------------api(expressjs)
+    api:
+        restart: always
+        build:
+            context: .
+            dockerfile: Dockerfile__api
+        container_name: api
+        command: >
+            sh -c "node index.js"
+        ports:
+            - ${SERVER_PORT_OUTER}:3000
+        expose:
+            - 3000
+        networks:
+            - backend
+        links:
+            - db
+        depends_on:
+            - db
+    # ------------------------------------------------------db(mongodb)
+    db:
+        restart: always
+        image: mongodb/mongodb-community-server:latest
+        container_name: db
+        ports:
+            - ${DB_PORT_OUTER}:27017
+        expose:
+            - 27017
+        networks:
+            - backend
+        volumes:
+            - ./dump:/dump
+            - ./db_data:/data/db
+    # ------------------------------------------------------other(volumes && networks)
+volumes:
+    db_data:
+    dump:
+
+networks:
+    backend:
