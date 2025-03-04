@@ -1,9 +1,0 @@
-{
-	"indexes": [
-		{ "v": { "$numberInt": "2" }, "key": { "_id": { "$numberInt": "1" } }, "name": "_id_" },
-		{ "v": { "$numberInt": "2" }, "key": { "username": { "$numberInt": "1" } }, "name": "username_1", "background": true, "unique": true }
-	],
-	"uuid": "0782677619ae446c92460d151aacafcd",
-	"collectionName": "users",
-	"type": "collection"
-}
