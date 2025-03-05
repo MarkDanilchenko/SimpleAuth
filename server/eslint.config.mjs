@@ -13,13 +13,7 @@ export default [
     files: ["**/*.{js,ts,mjs,cjs}"],
   },
   {
-    ignores: [
-      "**/node_modules/**",
-      "**/dist/**",
-      "**/build/**",
-      "**/coverage/**",
-      ".output/**",
-    ],
+    ignores: ["**/node_modules/**", "**/dist/**", "**/build/**", "**/coverage/**", ".output/**"],
   },
   {
     languageOptions: {

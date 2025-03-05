@@ -1,22 +1,20 @@
-// --------------------------------------SERVER_CONFIG
-const express = require('express');
-const app = express();
-const { router: apiRouter } = require('./routes/router.js');
+import express from "express";
+import router from "./routes/router.js";
 
-// --------------------------------------COMMON_MIDDLEWARE
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use((req, res, next) => {
-	res.setHeader('Content-Type', 'text/html');
-	next();
+const server = express();
+
+server.use(express.json());
+server.use(express.urlencoded({ extended: false }));
+server.use((req, res, next) => {
+  res.setHeader("Content-Type", "application/json");
+  next();
 });
-app.use('/api/v1', apiRouter);
+server.use("/api/v1", router);
 
-app.get('/hello', (req, res) => {
-	res.status(200);
-	res.send('Hello, World!');
-	res.end();
+server.get("/test", (req, res) => {
+  res.status(200);
+  res.send("test");
+  res.end();
 });
 
-// --------------------------------------EXPORT
-module.exports = { app };
+export default server;
