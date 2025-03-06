@@ -8,11 +8,13 @@ const {
   MONGO_OUTER_PORT,
   MONGO_INITDB_ROOT_USERNAME,
   MONGO_INITDB_ROOT_PASSWORD,
+  COOKIE_SECRET,
 } = process.env;
 
 const expressOptions = {
   host: EXPRESS_SERVER_HOST || "127.0.0.1",
   port: EXPRESS_SERVER_PORT || 3000,
+  cookieSecret: COOKIE_SECRET,
 };
 
 const mongoOptions = {

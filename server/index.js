@@ -6,7 +6,7 @@ import { logger } from "./server.js";
 async function startServer() {
   try {
     await mongoose.connect(
-      `mongodb://${mongoOptions.username}:${mongoOptions.password}@${mongoOptions.host}:${mongoOptions.outerPort}/simpleauth`,
+      `mongodb://${mongoOptions.username}:${mongoOptions.password}@${mongoOptions.host}:${mongoOptions.outerPort}/simpleauth`
     );
     logger.info("Mongoose is connected");
 
