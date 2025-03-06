@@ -1,7 +1,14 @@
 import express from "express";
 import router from "./routes/router.js";
+import winston from "winston";
 
 const server = express();
+
+const logger = winston.createLogger({
+  level: "info",
+  format: winston.format.json(),
+  transports: [new winston.transports.Console()],
+});
 
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
@@ -17,4 +24,5 @@ server.get("/test", (req, res) => {
   res.end();
 });
 
+export { logger };
 export default server;
