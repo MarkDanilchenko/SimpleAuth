@@ -1,3 +1,5 @@
 import mongoose from "mongoose";
 
-export default mongoose;
+const Schema = mongoose.Schema;
+
+export { mongoose, Schema };

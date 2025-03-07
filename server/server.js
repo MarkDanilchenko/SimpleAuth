@@ -1,5 +1,5 @@
 import express from "express";
-import router from "./routes/router.js";
+import routerAuth from "./router/auth.js";
 import winston from "winston";
 import cookieParser from "cookie-parser";
 import { expressOptions } from "./env.js";
@@ -19,7 +19,8 @@ server.use((req, res, next) => {
   res.setHeader("Content-Type", "application/json");
   next();
 });
-server.use("/api/v1", router);
+
+server.use("/api/v1/auth", routerAuth);
 
 server.get("/test", (req, res) => {
   res.status(200);
