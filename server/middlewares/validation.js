@@ -1,6 +1,6 @@
-import { badRequestError } from "../utils/errors";
+import { badRequestError } from "../utils/errors.js";
 
-export function validateBody(schema) {
+function validateBody(schema) {
   return (req, res, next) => {
     try {
       schema.parse(req.body);
@@ -11,3 +11,5 @@ export function validateBody(schema) {
     }
   };
 }
+
+export { validateBody };

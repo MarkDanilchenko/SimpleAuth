@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
-import { expressOptions } from "../env";
-import { unauthorizedError } from "../utils/errors";
+import { expressOptions } from "../env.js";
+import { unauthorizedError } from "../utils/errors.js";
 
-export function jwtVerify(req, res, next) {
+function jwtVerify(req, res, next) {
   const accessToken = req.headers.authorization ? req.headers.authorization.split(" ")[1] : null;
   if (!accessToken) {
     unauthorizedError(res);
@@ -16,3 +16,5 @@ export function jwtVerify(req, res, next) {
 
   next();
 }
+
+export { jwtVerify };

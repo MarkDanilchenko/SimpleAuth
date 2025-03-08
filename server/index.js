@@ -1,13 +1,16 @@
 import server from "./server.js";
 import { expressOptions, mongoOptions } from "./env.js";
-import mongoose from "./models/index.js";
+import { mongoose } from "./models/index.js";
 import { logger } from "./server.js";
 
 async function startServer() {
   try {
-    await mongoose.connect(
-      `mongodb://${mongoOptions.username}:${mongoOptions.password}@${mongoOptions.host}:${mongoOptions.outerPort}/simpleauth`
-    );
+    await mongoose.connect(`mongodb://${mongoOptions.host}:${mongoOptions.outerPort}/simpleauth`, {
+      authSource: "admin",
+      user: mongoOptions.username,
+      pass: mongoOptions.password,
+    });
+
     logger.info("Mongoose is connected");
 
     server.listen(expressOptions.port, expressOptions.host, () => {

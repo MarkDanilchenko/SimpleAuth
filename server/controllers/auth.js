@@ -1,9 +1,9 @@
-import { User } from "../models/user";
-import { Role } from "../models/role";
+import { User } from "../models/user.js";
+import { Role } from "../models/role.js";
 import crypto from "crypto";
-import { badRequestError, notFoundError, unauthorizedError } from "../utils/errors";
+import { badRequestError, notFoundError, unauthorizedError } from "../utils/errors.js";
 import jwt from "jsonwebtoken";
-import { expressOptions } from "../env";
+import { expressOptions } from "../env.js";
 
 class AuthController {
   async signUp(req, res) {
@@ -89,4 +89,4 @@ class AuthController {
 
 const authController = new AuthController();
 
-export default authController;
+export { authController };

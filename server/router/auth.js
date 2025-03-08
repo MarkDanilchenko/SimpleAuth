@@ -1,8 +1,8 @@
 import express from "express";
-import authController from "../controllers/auth";
-import { validateBody } from "../middlewares/validation";
-import { jwtVerify } from "../middlewares/jwtVerification";
-import { signUpSchema, signInSchema, profileSchema } from "../utils/validationSchemas/auth";
+import { authController } from "../controllers/auth.js";
+import { validateBody } from "../middlewares/validation.js";
+import { jwtVerify } from "../middlewares/jwtVerification.js";
+import { signUpSchema, signInSchema, profileSchema } from "../utils/validationSchemas/auth.js";
 
 const router = express.Router();
 
