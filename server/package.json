@@ -9,7 +9,6 @@
     "format": "eslint . --fix && prettier --write ."
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",

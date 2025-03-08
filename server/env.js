@@ -9,12 +9,16 @@ const {
   MONGO_INITDB_ROOT_USERNAME,
   MONGO_INITDB_ROOT_PASSWORD,
   COOKIE_SECRET,
+  JWT_SECRET,
+  JWT_EXPIRES_IN,
 } = process.env;
 
 const expressOptions = {
   host: EXPRESS_SERVER_HOST || "127.0.0.1",
   port: EXPRESS_SERVER_PORT || 3000,
   cookieSecret: COOKIE_SECRET,
+  jwtSecret: JWT_SECRET,
+  jwtExpiresIn: JWT_EXPIRES_IN,
 };
 
 const mongoOptions = {
