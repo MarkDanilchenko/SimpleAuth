@@ -64,7 +64,7 @@ class AuthController {
 
   async profile(req, res) {
     const { userId, roleId } = jwt.decode(req.headers.authorization.split(" ")[1]);
-    const anotherUserId = req.userId; // This is a userId of another user that you want to get profile as admin;
+    const anotherUserId = req.body.userId; // This is a userId of another user that you want to get profile as admin;
 
     let profile;
 

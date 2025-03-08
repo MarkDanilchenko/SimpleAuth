@@ -1,3 +1,5 @@
+import { badRequestError } from "../utils/errors";
+
 export function validateBody(schema) {
   return (req, res, next) => {
     try {
@@ -5,9 +7,7 @@ export function validateBody(schema) {
 
       next();
     } catch (error) {
-      res.status(400);
-      res.send(JSON.stringify({ error: error.message }));
-      res.end();
+      badRequestError(res, error.message);
     }
   };
 }
