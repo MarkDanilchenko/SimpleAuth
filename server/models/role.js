@@ -6,7 +6,6 @@ const RoleSchema = new Schema({
     required: true,
     unique: true,
     enum: ["admin", "moderator", "member", "guest"],
-    default: "guest",
   },
 });
 

@@ -7,16 +7,16 @@ import { expressOptions } from "../env.js";
 
 class AuthController {
   async signUp(req, res) {
-    const { username, firstName, lastName, age, password, role } = req.body;
+    const { username, firstName, lastName, age, password, roleName } = req.body;
 
-    const isUserExist = await User.exists({ username });
-    if (isUserExist) {
-      badRequestError(res, "User with this username already exist!");
+    const isUserExists = await User.exists({ username });
+    if (isUserExists) {
+      return badRequestError(res, "User with this username already exist!");
     }
 
-    const roleId = await Role.exists({ role });
-    if (!roleId) {
-      notFoundError(res, "Role not found!");
+    let roleInstance = await Role.findOne({ role: roleName });
+    if (!roleInstance) {
+      roleInstance = await Role.create({ role: roleName });
     }
 
     try {
@@ -28,14 +28,14 @@ class AuthController {
         lastName,
         age,
         password: hashedPassword,
-        role: roleId,
+        roleId: roleInstance._id,
       });
 
       res.status(201);
       res.end();
     } catch (error) {
       res.status(400);
-      res.send(JSON.stringify({ error: error.message }));
+      res.send(JSON.stringify({ message: error.message }));
       res.end();
     }
   }
@@ -45,12 +45,12 @@ class AuthController {
 
     const user = await User.findOne({ username });
     if (!user) {
-      notFoundError(res, "User with this username not found!");
+      return notFoundError(res, "User with this username not found!");
     }
 
     const checkPassword = crypto.createHash("sha256").update(password).digest("hex") === user.password;
     if (!checkPassword) {
-      unauthorizedError(res, "Wrong password!");
+      return unauthorizedError(res, "Wrong password!");
     }
 
     const accessToken = jwt.sign({ userId: user._id, roleId: user.roleId }, expressOptions.jwtSecret, {
@@ -64,26 +64,34 @@ class AuthController {
 
   async profile(req, res) {
     const { userId, roleId } = jwt.decode(req.headers.authorization.split(" ")[1]);
-    const anotherUserId = req.body.userId; // This is a userId of another user that you want to get profile as admin;
+    const anotherUserId = req.body.anotherUserId; // anotherUserId is id of another user that you want to get profile as admin;
 
     let profile;
 
     const role = await Role.findById(roleId);
     if (!role) {
-      notFoundError(res, "Role not found!");
+      return notFoundError(res, "Role not found!");
     }
 
-    if (role.role === "admin" && anotherUserId) {
-      profile = await User.findById(anotherUserId);
-    } else {
-      profile = await User.findById(userId);
-    }
-    profile.password = undefined;
-    profile.role = role;
+    try {
+      if (role.role === "admin" && anotherUserId) {
+        profile = await User.findById(anotherUserId).populate("roleId");
+        if (!profile) {
+          return notFoundError(res, "User not found!");
+        }
+      } else {
+        profile = await User.findById(userId).populate("roleId");
+      }
+      profile.password = undefined;
 
-    res.status(200);
-    res.send(JSON.stringify({ profile }));
-    res.end();
+      res.status(200);
+      res.send(JSON.stringify({ profile }));
+      res.end();
+    } catch (error) {
+      res.status(400);
+      res.send(JSON.stringify({ message: error.message }));
+      res.end();
+    }
   }
 }
 

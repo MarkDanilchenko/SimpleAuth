@@ -6,7 +6,7 @@ const signUpSchema = z.object({
   lastName: z.string().optional(),
   age: z.number().min(1).max(120),
   password: z.string().min(8),
-  role: z.enum(["admin", "moderator", "member", "guest"]),
+  roleName: z.enum(["admin", "moderator", "member", "guest"]),
 });
 
 const signInSchema = z.object({
