@@ -28,5 +28,11 @@ server.get("/test", (req, res) => {
   res.end();
 });
 
+server.all("*", (req, res) => {
+  res.status(404);
+  res.send(JSON.stringify({ message: "Not found!" }));
+  res.end();
+});
+
 export { logger };
 export default server;
