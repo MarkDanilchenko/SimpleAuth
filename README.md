@@ -29,7 +29,7 @@ This API based on NodeJS (ExpressJS) and provides endpoints for signIn/signUp an
   cd SimpleAuth && docker compose  --env-file ./.env.public -f ./compose.yaml up --build   
   ```
 
-3. After the installation is complete the web-app will start on: `localhost:<EXPRESS_SERVER_PORT>`:
+3. After the installation is complete the web-app will start on: `0.0.0.0:<EXPRESS_SERVER_PORT>`:
 
 - `<EXPRESS_SERVER_PORT>` - is defined in `./.env.public`;
 
