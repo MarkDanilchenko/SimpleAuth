@@ -1,101 +1,76 @@
-## Description
+## App Description &#128209;
 
-This is a test project 'NODEJS_SimpleAuth' using:
+This API based on NodeJS (ExpressJS) and provides endpoints for signIn/signUp and users profile, according to payload in JWT.
 
+## Launch instructions &#128190;
+  
+&#9881;**Backend**:
+
+- ExpressJS;
 - MongoDB;
 - Mongoose;
-- ExpressJS;
-- Docker + Compose;
-- JWT (accessToken).
+- Docker;
 
-## Launch instructions
+<div style="display: flex; justify-content: end;">
+  <p>Git and Docker should be installed locally on Your PC.</p>
+</div>
 
-1. Clone repository/archive to your **local folder**;
-2. Open Terminal and make sure You are in **local folder**:
+---
 
-```
-cd '.../local_folder'
-```
+1. Clone repository to Your local path:
 
-3. Copy file dev.env and rename to .env in the same root directory:
+  ```sh
+  cd <your_local_path> && git clone <http/ssh-link>
+  ```
 
-```
-cp dev.env .env
-```
+2. Run compose:
 
-4. (optional) Open and follow the instructions in the new created .env file if you want *to specify app-host and outer-port for docker containers*;
+  ```sh
+  cd SimpleAuth && docker compose  --env-file ./.env.public -f ./compose.yaml up --build   
+  ```
 
-5. For this step you should already have installed Docker and Compose on your PC. Start installation:
+3. After the installation is complete the web-app will start on: `localhost:<EXPRESS_SERVER_PORT>`:
 
-```
-docker-compose up --build -d
-```
+- `<EXPRESS_SERVER_PORT>` - is defined in `./.env.public`;
 
-- Installation can take some time, it depends on your PC resources;
-- Installation is completed when Terminal is ready for the next input. Restore default data:
+4. Stop the web-app press in current terminal:
 
-```
-docker exec -it <DB_HOST from .env> mongorestore --db nodejs_simpleauth --drop ./dump
-```
+  ```sh
+  Ctrl + C
+  # or
+  docker compose --env-file ./.env.public stop
+  ```
 
-- After that, the client-server will start automatically on
+5. Start again the web-app:
 
-    <SERVER_HOST from .env>:<SERVER_PORT_OUTER from .env>;
-- Open app in your browser with URL;
+  ```sh
+  docker compose --env-file ./.env.public start
+  ```
 
-    <http://<SERVER_HOST from .env>:<SERVER_PORT_OUTER from .env>/>
+6. To completely remove all related docker containers, docker images, volumes and related data:
 
-6. **Test page endpoint** (you should be able to see simple greeting text):
+  ```sh
+  docker compose --env-file ./.env.public down --volumes --rmi all
+  ```
 
-- **url.../hello**
+  <span style="color: rgb(255, 0, 0)">After this step, it is need to go back to point №2 to run web-app again.</span>
 
-7. API provide 3 endpoints except test one:
+---
 
-- **url.../api/v1/sign_up**
-  - *user registration* with username and password (user-role: user);
-- **url.../api/v1/sign_in**
-  - *user authentication* with username and password and jwt-access in response;
-- **url.../api/v1/profile**
-  - get *whole information about all users* in the database (for admin-role only). Should use JWT in request body;
+### p.s
 
-8. The default users has been already created;
+- Local environment variables can be changed in the `./.env.public`<br/>
 
-- You can login under current admin using credentials:
+## API routes &#128190;
 
-```
-username: admin
+1. **/test** - receive test message from server;
 
-password: admin12345
-```
+2. **/api/v1/auth/signup** - sign up for new users;
 
-- You can login under default user using credentials:
+3. **/api/v1/auth/signin** - sign in for registered users with access token in response;
 
-```
-username: user
+4. **/api/v1/auth/profile** - receive information about user's profile according to provided JWT or according to `anotherUserId` if current user is admin;
 
-password: user12345
-```
+<br>
 
-9. To **stop** the app (**server**):
-
-```
-Ctrl + C
-```
-
-10. To **stop** the app (**stop** all docker **containers**):
-
-```
-docker compose stop
-```
-
-11. To **start** the app (**start** all docker **containers**):
-
-```
-docker compose start
-```
-
-12. To completely **remove** all created docker **containers, images and volumes**:
-
-```
-docker compose down --volumes --rmi all
-```
+---

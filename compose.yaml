@@ -3,36 +3,32 @@ services:
     restart: always
     build:
       context: .
-      dockerfile: Dockerfile__api
+      dockerfile: Dockerfile
     container_name: api
     command: >
-      sh -c "node index.js"
+      sh -c "npm run start"
     ports:
-      - ${SERVER_PORT_OUTER}:3000
-    expose:
-      - 3000
-    networks:
-      - backend
-    links:
-      - db
+      - ${EXPRESS_SERVER_PORT}:${EXPRESS_SERVER_PORT}
+    env_file:
+      - ./.env.public
     depends_on:
       - db
   db:
     restart: always
-    image: mongodb/mongodb-community-server:latest
+    image: mongo:latest
     container_name: db
     ports:
-      - ${DB_PORT_OUTER}:27017
-    expose:
-      - 27017
-    networks:
-      - backend
+      - ${MONGO_PORT}:${MONGO_PORT}
+    env_file:
+      - ./.env.public
     volumes:
-      - ./dump:/dump
       - ./db_data:/data/db
+    healthcheck:
+      test: [ "CMD", "mongo", "--version" ]
+      timeout: 15s
+      interval: 5s
+      retries: 3
+
 volumes:
   db_data:
-  dump:
-
-networks:
-  backend:
+    driver: local

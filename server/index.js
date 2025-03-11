@@ -5,10 +5,10 @@ import { logger } from "./server.js";
 
 async function startServer() {
   try {
-    await mongoose.connect(`mongodb://${mongoOptions.host}:${mongoOptions.outerPort}/simpleauth`, {
-      authSource: "admin",
+    await mongoose.connect(`mongodb://${mongoOptions.host}:${mongoOptions.port}/`, {
       user: mongoOptions.username,
       pass: mongoOptions.password,
+      dbName: "simpleauth",
     });
 
     logger.info("Mongoose is connected");

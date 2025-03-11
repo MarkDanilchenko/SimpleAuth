@@ -24,7 +24,7 @@ server.use("/api/v1/auth", routerAuth);
 
 server.get("/test", (req, res) => {
   res.status(200);
-  res.send("test");
+  res.send(JSON.stringify({ message: "test" }));
   res.end();
 });
 
