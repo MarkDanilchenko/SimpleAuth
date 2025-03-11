@@ -4,7 +4,7 @@ This API based on NodeJS (ExpressJS) and provides endpoints for signIn/signUp an
 
 ## Launch instructions &#128190;
   
-&#9881;**Backend**:
+&#9881; **Backend**:
 
 - ExpressJS;
 - MongoDB;
