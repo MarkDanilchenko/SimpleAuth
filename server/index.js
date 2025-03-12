@@ -25,7 +25,9 @@ startServer();
 
 process.on("SIGINT", async () => {
   await mongoose.disconnect();
+
   logger.info("Mongoose is disconnected");
   logger.info("Server is stopped");
+
   process.exit(0);
 });
