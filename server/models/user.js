@@ -1,4 +1,4 @@
-import { mongoose, Schema } from "./index.js";
+import { Schema } from "./index.js";
 
 const UserSchema = new Schema({
   username: { type: String, required: true, unique: true },
@@ -9,6 +9,4 @@ const UserSchema = new Schema({
   roleId: { type: Schema.Types.ObjectId, ref: "Role", required: true },
 });
 
-const User = mongoose.model("User", UserSchema);
-
-export { User };
+export { UserSchema };

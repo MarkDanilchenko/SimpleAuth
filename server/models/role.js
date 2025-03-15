@@ -1,4 +1,4 @@
-import { mongoose, Schema } from "./index.js";
+import { Schema } from "./index.js";
 
 const RoleSchema = new Schema({
   role: {
@@ -9,6 +9,4 @@ const RoleSchema = new Schema({
   },
 });
 
-const Role = mongoose.model("Role", RoleSchema);
-
-export { Role };
+export { RoleSchema };

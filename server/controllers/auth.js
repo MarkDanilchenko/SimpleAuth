@@ -1,5 +1,5 @@
-import { User } from "../models/user.js";
-import { Role } from "../models/role.js";
+import { User } from "../models/init.js";
+import { Role } from "../models/init.js";
 import crypto from "crypto";
 import { badRequestError, notFoundError, unauthorizedError } from "../utils/errors.js";
 import jwt from "jsonwebtoken";

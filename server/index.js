@@ -1,6 +1,6 @@
 import server from "./server.js";
 import { expressOptions, mongoOptions } from "./env.js";
-import { mongoose } from "./models/index.js";
+import mongoose from "./models/init.js";
 import { logger } from "./server.js";
 
 async function startServer() {
