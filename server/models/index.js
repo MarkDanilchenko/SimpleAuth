@@ -2,4 +2,4 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-export { Schema };
+export { Schema, mongoose };
