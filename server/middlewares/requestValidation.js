@@ -9,7 +9,7 @@ function validateRequestBody(schema) {
       next();
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return badRequestError(res, error.issues[0].message);
+        return badRequestError(res, error.issues[0]);
       }
 
       badRequestError(res, error.message);
