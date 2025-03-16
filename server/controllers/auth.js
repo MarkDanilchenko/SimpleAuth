@@ -34,9 +34,7 @@ class AuthController {
       res.status(201);
       res.end();
     } catch (error) {
-      res.status(400);
-      res.send(JSON.stringify({ message: error.message }));
-      res.end();
+      badRequestError(res, error.message);
     }
   }
 
@@ -88,9 +86,7 @@ class AuthController {
       res.send(JSON.stringify({ profile }));
       res.end();
     } catch (error) {
-      res.status(400);
-      res.send(JSON.stringify({ message: error.message }));
-      res.end();
+      badRequestError(res, error.message);
     }
   }
 }
