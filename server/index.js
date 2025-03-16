@@ -8,7 +8,7 @@ async function startServer() {
     await mongoose.connect(`mongodb://${mongoOptions.host}:${mongoOptions.port}/`, {
       user: mongoOptions.username,
       pass: mongoOptions.password,
-      dbName: "simpleauth",
+      dbName: mongoOptions.db,
     });
 
     logger.info("Mongoose is connected");

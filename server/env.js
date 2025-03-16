@@ -6,6 +6,7 @@ const {
   EXPRESS_SERVER_PORT,
   MONGO_HOST,
   MONGO_PORT,
+  MONGO_DB,
   MONGO_INITDB_ROOT_USERNAME,
   MONGO_INITDB_ROOT_PASSWORD,
   COOKIE_SECRET,
@@ -24,6 +25,7 @@ const expressOptions = {
 const mongoOptions = {
   host: MONGO_HOST,
   port: MONGO_PORT || 27017,
+  db: MONGO_DB,
   username: MONGO_INITDB_ROOT_USERNAME,
   password: MONGO_INITDB_ROOT_PASSWORD,
 };

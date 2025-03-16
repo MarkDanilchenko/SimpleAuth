@@ -11,7 +11,7 @@ class AuthController {
 
     const isUserExists = await User.exists({ username });
     if (isUserExists) {
-      return badRequestError(res, "User with this username already exist!");
+      return badRequestError(res, "User already exists!");
     }
 
     let roleInstance = await Role.findOne({ role: roleName });
@@ -43,7 +43,7 @@ class AuthController {
 
     const user = await User.findOne({ username });
     if (!user) {
-      return notFoundError(res, "User with this username not found!");
+      return notFoundError(res, "User not found!");
     }
 
     const checkPassword = crypto.createHash("sha256").update(password).digest("hex") === user.password;

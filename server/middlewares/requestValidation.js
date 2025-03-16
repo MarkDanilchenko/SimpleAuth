@@ -1,7 +1,7 @@
 import { badRequestError } from "../utils/errors.js";
 import { z } from "zod";
 
-function validateBody(schema) {
+function validateRequestBody(schema) {
   return (req, res, next) => {
     try {
       schema.parse(req.body);
@@ -17,4 +17,4 @@ function validateBody(schema) {
   };
 }
 
-export { validateBody };
+export { validateRequestBody };
